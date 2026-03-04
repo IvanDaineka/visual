@@ -1,61 +1,61 @@
-interface User {
+export interface User {
     id: number;
     name: string;
     email?: string;
     isActive: boolean;
 }
 
-function createUser(id: number, name: string, email?: string, isActive: boolean = true): User {
+export function createUser(id: number, name: string, email?: string, isActive: boolean = true): User {
     return { id, name, email, isActive };
 }
 
-interface Book {
+export interface Book {
     title: string;
     author: string;
     year?: number;
     genre: 'fiction' | 'non-fiction';
 }
 
-function createBook(book: Book): Book {
+export function createBook(book: Book): Book {
     return book;
 }
 
-function calculateArea(shape: 'circle', radius: number): number;
-function calculateArea(shape: 'square', side: number): number;
-function calculateArea(shape: 'circle' | 'square', param: number): number {
+export function calculateArea(shape: 'circle', radius: number): number;
+export function calculateArea(shape: 'square', side: number): number;
+export function calculateArea(shape: 'circle' | 'square', param: number): number {
     if (shape === 'circle') return Math.PI * param * param;
     return param * param;
 }
 
-type Status = 'active' | 'inactive' | 'new';
+export type Status = 'active' | 'inactive' | 'new';
 
-function getStatusColor(status: Status): string {
+export function getStatusColor(status: Status): string {
     if (status === 'active') return 'green';
     if (status === 'inactive') return 'red';
     return 'blue';
 }
 
-type StringFormatter = (input: string, uppercase?: boolean) => string;
+export type StringFormatter = (input: string, uppercase?: boolean) => string;
 
-const capitalizeFirst: StringFormatter = (input, uppercase = false) => {
+export const capitalizeFirst: StringFormatter = (input, uppercase = false) => {
     if (input.length === 0) return input;
     return input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
 };
 
-const trimAndTransform: StringFormatter = (input, uppercase = false) => {
+export const trimAndTransform: StringFormatter = (input, uppercase = false) => {
     const trimmed = input.trim();
     return uppercase ? trimmed.toUpperCase() : trimmed;
 };
 
-function getFirstElement<T>(arr: T[]): T | undefined {
+export function getFirstElement<T>(arr: T[]): T | undefined {
     return arr[0];
 }
 
-interface HasId {
+export interface HasId {
     id: number;
 }
 
-function findById<T extends HasId>(items: T[], id: number): T | undefined {
+export function findById<T extends HasId>(items: T[], id: number): T | undefined {
     for (let i = 0; i < items.length; i++) {
         if (items[i].id === id) {
             return items[i];
