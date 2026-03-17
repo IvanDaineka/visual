@@ -14,14 +14,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
+  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/IvanDaineka/visual/issues"
   },
   "homepage": "https://github.com/IvanDaineka/visual#readme",
   "devDependencies": {
-    "vitest": "^3.2.4",
-    "@vitest/coverage-v8": "^3.2.4",
-    "@vitest/ui": "^3.2.4"
+    "vitest": "^4.0.18"
   }
 }
