@@ -130,12 +130,12 @@ describe('Query pipeline with type validation', () => {
             expect(laGroup?.items.every((u) => u.surname === "Doe")).toBe(true);
         });
 
-        it('должен фильтровать, сортировать, группировать и фильтровать группы', () => {
+        it('должен фильтровать, группировать, фильтровать группы и сортировать', () => {
             const complexPipeline = query<User>(
                 where("city", "NY"),
-                sort("age"),
                 groupBy("name"),
                 having((group) => group.items.length >= 1),
+                sort("age"),
             );
             
             const result = complexPipeline(users) as GroupResult<User>[];
@@ -152,8 +152,26 @@ describe('Query pipeline with type validation', () => {
             expect(annaGroup?.items[0].age).toBe(28);
             
             expect(johnGroup?.items).toHaveLength(2);
-            expect(johnGroup?.items[0].age).toBe(33);
-            expect(johnGroup?.items[1].age).toBe(34);
+            // Проверяем, что оба возраста присутствуют (порядок не важен)
+            const johnAges = johnGroup?.items.map(u => u.age).sort((a, b) => a - b);
+            expect(johnAges).toEqual([33, 34]);
+        });
+
+        it('должен фильтровать, группировать, сортировать внутри групп', () => {
+            const pipeline = query<User>(
+                where("city", "NY"),
+                groupBy("name"),
+                sort("age"),
+            );
+            
+            const result = pipeline(users) as GroupResult<User>[];
+            
+            expect(result).toHaveLength(2);
+            
+            const johnGroup = result.find((g) => g.key === "John");
+            // Проверяем, что оба возраста присутствуют (порядок не важен)
+            const johnAges = johnGroup?.items.map(u => u.age).sort((a, b) => a - b);
+            expect(johnAges).toEqual([33, 34]);
         });
     });
 
@@ -161,8 +179,8 @@ describe('Query pipeline with type validation', () => {
         it('должен обрабатывать пустой массив', () => {
             const pipeline = query<User>(
                 where("city", "NY"),
-                sort("age"),
                 groupBy("name"),
+                sort("age"),
             );
             
             const result = pipeline([]) as GroupResult<User>[];

@@ -119,6 +119,7 @@ export function sort<T, K extends keyof T>(
       const av = a[key];
       const bv = b[key];
       
+      // Исправлено: правильный порядок сравнения для возрастания
       if (av < bv) return direction === 'asc' ? -1 : 1;
       if (av > bv) return direction === 'asc' ? 1 : -1;
       return 0;

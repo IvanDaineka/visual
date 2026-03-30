@@ -15,6 +15,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/IvanDaineka/visual/issues"
+  },
+  "homepage": "https://github.com/IvanDaineka/visual#readme",
   "devDependencies": {
     "@types/node": "^20.0.0",
     "typescript": "^5.0.0",
