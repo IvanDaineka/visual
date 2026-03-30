@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { 
     query, where, sort, groupBy, having, GroupResult
-} from './types';
+} from './types.js';
 
 type User = {
     id: number;
